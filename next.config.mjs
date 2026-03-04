@@ -4,7 +4,7 @@ const isProd = process.env.NODE_ENV === 'production';
 const nextConfig = {
     output: 'export',
     // This helps GitHub Pages resolve your assets automatically based on your repo name
-    basePath: isProd ? '/Portfolio' : '',
+    basePath: '',
     images: {
         unoptimized: true,
     }
