@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   description: "High-end scrollytelling personal portfolio website.",
 };
 
+import CustomCursor from "@/components/CustomCursor";
+import { Preloader } from "@/components/Preloader";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -16,7 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} font-sans antialiased bg-background text-foreground selection:bg-white/30`}>
+      <body className={`${inter.variable} font-sans antialiased bg-background text-foreground selection:bg-white/30 cursor-none`}>
+        <Preloader />
+        <CustomCursor />
         {children}
       </body>
     </html>

@@ -5,8 +5,9 @@ import { useScroll, useMotionValueEvent } from "framer-motion";
 import { Overlay } from "./Overlay";
 
 const FRAME_COUNT = 45; // 0 to 44
+const basePath = process.env.NODE_ENV === "production" ? "/Portfolio" : "";
 const getFramePath = (index: number) =>
-    `/sequence/frame_${index.toString().padStart(2, "0")}_delay-0.066s.png`;
+    `${basePath}/sequence/frame_${index.toString().padStart(2, "0")}_delay-0.066s.png`;
 
 export default function ScrollyCanvas() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -35,6 +36,7 @@ export default function ScrollyCanvas() {
             loadedImages.push(img);
         }
         setImages(loadedImages);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const renderFrame = (index: number, imgArray: HTMLImageElement[] = images) => {
@@ -97,6 +99,7 @@ export default function ScrollyCanvas() {
         updateCanvasSize();
         window.addEventListener("resize", updateCanvasSize);
         return () => window.removeEventListener("resize", updateCanvasSize);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [images, scrollYProgress]);
 
     // Scrub through images
