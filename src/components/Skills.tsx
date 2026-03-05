@@ -3,6 +3,8 @@
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useRef, useState, MouseEvent, useCallback } from "react";
 import { skills, stats } from "@/data/portfolio";
+import { CountUp } from "./CountUp";
+import { AnimatedHeading, AnimatedBadge } from "./AnimatedText";
 
 function SkillCard({ skill, index }: { skill: typeof skills[0], index: number }) {
     const [isHovered, setIsHovered] = useState(false);
@@ -113,30 +115,30 @@ export function Skills() {
             />
 
             {/* Section Title */}
-            <motion.div
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="mb-20 md:mb-28 text-center px-6"
-            >
-                <motion.span
+            <div className="mb-20 md:mb-28 text-center px-6">
+                <AnimatedBadge text="Skills & Expertise" />
+                <AnimatedHeading
+                    text="Technical Arsenal"
+                    className="text-5xl md:text-8xl font-bold tracking-tighter text-white mb-6"
+                    delay={0.2}
+                />
+                <motion.div
+                    className="w-24 h-1 bg-emerald-400/40 rounded-full mx-auto"
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                />
+                <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
-                    className="inline-block px-4 py-1.5 rounded-full border border-emerald-400/20 bg-emerald-400/[0.04] text-emerald-400 text-xs font-medium tracking-widest uppercase mb-8"
+                    transition={{ delay: 0.6 }}
+                    className="mt-6 text-white/40 text-lg max-w-xl mx-auto"
                 >
-                    Skills & Expertise
-                </motion.span>
-                <h2 className="text-5xl md:text-8xl font-bold tracking-tighter text-white mb-6">
-                    Technical Arsenal
-                </h2>
-                <div className="w-24 h-1 bg-emerald-400/40 rounded-full mx-auto" />
-                <p className="mt-6 text-white/40 text-lg max-w-xl mx-auto">
                     Mastering the tools that transform ideas into exceptional mobile experiences
-                </p>
-            </motion.div>
+                </motion.p>
+            </div>
 
             {/* Skills Grid with Mouse Spotlight */}
             <div
@@ -176,23 +178,21 @@ export function Skills() {
                     {stats.map((stat, idx) => (
                         <div key={stat.label} className="contents">
                             <div className="text-center">
-                                <motion.span
+                                <CountUp
+                                    value={stat.value}
                                     className="block text-4xl md:text-5xl font-bold text-white"
-                                    initial={{ opacity: 0 }}
-                                    whileInView={{ opacity: 1 }}
-                                    viewport={{ once: true }}
-                                >
-                                    {stat.value}
-                                </motion.span>
+                                />
                                 <span className="text-white/30 text-sm mt-1 block">{stat.label}</span>
                             </div>
-                            {idx < stats.length - 1 && (
-                                <div className="w-px h-12 bg-white/10 hidden md:block" />
-                            )}
+                            {
+                                idx < stats.length - 1 && (
+                                    <div className="w-px h-12 bg-white/10 hidden md:block" />
+                                )
+                            }
                         </div>
                     ))}
                 </div>
             </motion.div>
-        </section>
+        </section >
     );
 }

@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { useRef } from "react";
 import { experiences } from "@/data/portfolio";
+import { AnimatedHeading } from "./AnimatedText";
 
 // Scrub-Linked Word Reveal
 function Word({ word, progress, range }: { word: string, progress: MotionValue<number>, range: [number, number] }) {
@@ -103,18 +104,19 @@ export function Experience() {
         <section className="relative z-20 py-32 md:py-48 w-full bg-[#0a0a0a] overflow-hidden">
 
             {/* Section Header */}
-            <motion.div
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="mb-24 md:mb-32 px-6 md:px-12 lg:px-24 text-center"
-            >
-                <h2 className="text-5xl md:text-8xl font-bold tracking-tighter text-white mb-6">
-                    Career Journey
-                </h2>
-                <div className="w-24 h-1 bg-emerald-400/40 rounded-full mx-auto" />
-            </motion.div>
+            <div className="mb-24 md:mb-32 px-6 md:px-12 lg:px-24 text-center">
+                <AnimatedHeading
+                    text="Career Journey"
+                    className="text-5xl md:text-8xl font-bold tracking-tighter text-white mb-6"
+                />
+                <motion.div
+                    className="w-24 h-1 bg-emerald-400/40 rounded-full mx-auto"
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                />
+            </div>
 
             {/* Timeline */}
             <div className="px-6 md:px-12 lg:px-24">

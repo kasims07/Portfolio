@@ -11,6 +11,8 @@ export const metadata: Metadata = {
 
 import CustomCursor from "@/components/CustomCursor";
 import { Preloader } from "@/components/Preloader";
+import { SmoothScroll } from "@/components/SmoothScroll";
+import { ScrollProgress } from "@/components/ScrollProgress";
 
 export default function RootLayout({
   children,
@@ -19,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} font-sans antialiased bg-background text-foreground selection:bg-white/30 cursor-none`}>
+      <body className={`${inter.variable} font-sans antialiased bg-background text-foreground cursor-none`}>
+        <SmoothScroll />
+        <ScrollProgress />
         <Preloader />
         <CustomCursor />
         {children}

@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { MouseEvent, useRef } from "react";
 import { projects } from "@/data/portfolio";
+import { AnimatedHeading } from "./AnimatedText";
 
 type Project = typeof projects[0];
 
@@ -125,19 +126,28 @@ export function Projects() {
         <section className="relative z-20 py-32 md:py-48 bg-[#121212] overflow-hidden">
 
             {/* Section Header */}
-            <motion.div
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="mb-24 md:mb-32 px-6 md:px-12 lg:px-24 text-center"
-            >
-                <h2 className="text-5xl md:text-8xl font-bold tracking-tighter text-white mb-6">
-                    Selected Works
-                </h2>
-                <div className="w-24 h-1 bg-emerald-400/40 rounded-full mx-auto" />
-                <p className="mt-6 text-white/40 text-lg max-w-xl mx-auto">Crafting digital experiences for millions of users across the globe</p>
-            </motion.div>
+            <div className="mb-24 md:mb-32 px-6 md:px-12 lg:px-24 text-center">
+                <AnimatedHeading
+                    text="Selected Works"
+                    className="text-5xl md:text-8xl font-bold tracking-tighter text-white mb-6"
+                />
+                <motion.div
+                    className="w-24 h-1 bg-emerald-400/40 rounded-full mx-auto"
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                />
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.6 }}
+                    className="mt-6 text-white/40 text-lg max-w-xl mx-auto"
+                >
+                    Crafting digital experiences for millions of users across the globe
+                </motion.p>
+            </div>
 
             {/* Project List */}
             <div className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
